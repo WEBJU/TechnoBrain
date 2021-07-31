@@ -79,9 +79,9 @@ namespace Exercise01
         }
         private static String ones(String Number)
         {
-            int _Number = Convert.ToInt32(Number);
+            int InputNumber = Convert.ToInt32(Number);
             String name = "";
-            switch (_Number)
+            switch (InputNumber)
             {
 
                 case 1:
@@ -119,33 +119,33 @@ namespace Exercise01
             string word = "";
             try
             {
-                bool beginsZero = false;    
-                bool isDone = false;   
+                bool beginsZero = false;
+                bool isDone = false;
                 double dblAmt = (Convert.ToDouble(Number));
-                 
+
                 if (dblAmt > 0)
-                {   
+                {
                     beginsZero = Number.StartsWith("0");
 
                     int numDigits = Number.Length;
-                    int pos = 0;  
-                    String place = ""; 
+                    int pos = 0;
+                    String place = "";
                     switch (numDigits)
                     {
-                        case 1:   
+                        case 1:
 
                             word = ones(Number);
                             isDone = true;
                             break;
-                        case 2:    
+                        case 2:
                             word = tens(Number);
                             isDone = true;
                             break;
-                        case 3:    
+                        case 3:
                             pos = (numDigits % 3) + 1;
                             place = " Hundred ";
                             break;
-                        case 4:   
+                        case 4:
                         case 5:
                         case 6:
                             pos = (numDigits % 4) + 1;
@@ -157,14 +157,34 @@ namespace Exercise01
                             pos = (numDigits % 7) + 1;
                             place = " Million ";
                             break;
-                        case 10:   
+                        case 10:
                         case 11:
                         case 12:
 
                             pos = (numDigits % 10) + 1;
                             place = " Billion ";
                             break;
-                       //more     
+                        case 13:
+                        case 14:
+                        case 15:
+
+                            pos = (numDigits % 13) + 1;
+                            place = " Trillion ";
+                            break;
+                        case 16:
+                        case 17:
+                        case 18:
+
+                            pos = (numDigits % 16) + 1;
+                            place = " Quadrillion ";
+                            break;
+                        case 19:
+                        case 20:
+                        case 21:
+
+                            pos = (numDigits % 19) + 1;
+                            place = " quintillion ";
+                            break;
                         default:
                             isDone = true;
                             break;
@@ -191,10 +211,10 @@ namespace Exercise01
             catch { }
             return word.Trim();
         }
-        private static String ConvertToWords(String numb)
+        internal static String ConvertToWords(String numb)
         {
             String val = "", wholeNo = numb, points = "", andStr = "", pointStr = "";
-            String endStr = "Only";
+            String endString = "Only";
             try
             {
                 int decimalPlace = numb.IndexOf(".");
@@ -204,12 +224,12 @@ namespace Exercise01
                     points = numb.Substring(decimalPlace + 1);
                     if (Convert.ToInt32(points) > 0)
                     {
-                        andStr = "and"; 
-                        endStr = "Paisa " + endStr;  
+                        andStr = "and";
+                        endString = "Paisa " + endString;
                         pointStr = ConvertDecimals(points);
                     }
                 }
-                val = String.Format("{0} {1}{2} {3}", Towards(wholeNo).Trim(), andStr, pointStr, endStr);
+                val = String.Format("{0} {1}{2} {3}", Towards(wholeNo).Trim(), andStr, pointStr, endString);
             }
             catch { }
             return val;
@@ -232,36 +252,7 @@ namespace Exercise01
             }
             return cd;
         }
-
-        static void Main(string[] args)
-        {
-            string isNegative = "";
-            try
-            {
-                Console.WriteLine("Enter a Number to convert to string");
-                string number = Console.ReadLine();
-                number = Convert.ToDouble(number).ToString();
-
-                if (number.Contains("-"))
-                {
-                    isNegative = "Minus ";
-                    number = number.Substring(1, number.Length - 1);
-                }
-                if (number == "0")
-                {
-                    Console.WriteLine("The number in words is \nZero ");
-                }
-                else
-                {
-                    Console.WriteLine("The number in words is \n{0}", isNegative + ConvertToWords(number));
-                }
-                Console.ReadKey();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
+    
     }
 
     }
